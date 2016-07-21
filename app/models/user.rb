@@ -5,11 +5,15 @@ class User < ActiveRecord::Base
 
   has_many :authentications, :dependent => :destroy
 
-  def self.create_with_auth_and_hash(authentications, auth_hash)
-  	create! do |u|
-  		u.first_name = auth_hash["info"]["first_name"]
-  		u.email = auth_hash["extra"]["raw_info"]["email"]
-  		u.authentications<<(authentication)
+  def self.create_with_auth_hash(auth_hash)
+  	@user = User.new
+  	@user.first_name = auth_hash["extra"]["raw_info"]["first_name"]
+  	@user.last_name = auth_hash["extra"]["raw_info"]["last_name"]
+  	@user.email = auth_hash["extra"]["raw_info"]["email"]
+  	@user.date_of_birth = Date.parse(auth_hash["extra"]["raw_info"]["birthday"]).strftime("%m/%d/%Y")
+  	@user.encrypted_password = ENV["3rd_party_sign_up"]
+  	if @user.save
+  		@user.authentications.create_with_omniauth(auth_hash)
   	end
   end
 
