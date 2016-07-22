@@ -1,3 +1,4 @@
 
-<h1>Hello, <%= current_user.first_name %></h1>
+<h1>Welcome, <%= current_user.first_name %></h1>
+<%= link_to "Add listing", new_listing_path, method: :get%>
 <%= link_to "Sign Out", sign_out_path, method: :delete %>

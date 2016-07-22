@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   validates :email, uniqueness: true
 
   has_many :authentications, :dependent => :destroy
+  has_many :listings
 
   def self.create_with_auth_hash(auth_hash)
   	@user = User.new

@@ -27,6 +27,8 @@ ActiveRecord::Schema.define(version: 20160722033510) do
 
   create_table "cities", force: :cascade do |t|
     t.string   "description", null: false
+    t.integer  "state_id",    null: false
+    t.integer  "country_id",  null: false
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
@@ -66,6 +68,7 @@ ActiveRecord::Schema.define(version: 20160722033510) do
 
   create_table "states", force: :cascade do |t|
     t.string   "description", null: false
+    t.integer  "country_id",  null: false
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end

@@ -1,0 +1,43 @@
+<h1>Add new listing</h1>
+
+<%= form_for @listing do |f| %>
+	<h2>Title</h2>
+		<%= f.text_field(:title) %>
+
+	<h2>Description</h2>
+		<%= f.text_area(:description) %>
+
+	<h2>Price</h2>
+		<%= f.number_field :price, :step => 0.01 %>
+
+
+	<h2>Pick your location</h2>	
+		<%= f.label :select_a_country %>
+			<%= f.select(:country_id) do %>
+				<%= content_tag(:option, "--", value: "#") %>
+				<% Country.all.order('description asc').each do |country| -%>
+					<%= content_tag(:option, country.description, value: country.id) %>
+				<% end %>
+			<% end %>
+
+		<%= f.label :select_a_state %>
+			<%= f.select(:state_id) do %>
+				<%= content_tag(:option, "--", value: "#") %>
+				<% State.all.order('description asc').each do |state| -%>
+					<%= content_tag(:option, state.description, value: state.id) %>
+				<% end %>
+			<% end %>
+
+		<%= f.label :select_a_city %>
+			<%= f.select(:city_id) do %>
+				<%= content_tag(:option, "--", value: "#") %>
+				<% City.all.order('description asc').each do |city| -%>
+					<%= content_tag(:option, city.description, value: city.id) %>
+				<% end %>
+			<% end %>
+		<br><br>
+
+		<%= f.file_field :image %>
+
+		<%= submit_tag("List") %>
+<% end %>
