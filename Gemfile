@@ -16,13 +16,10 @@ gem 'coffee-rails', '~> 4.1.0'
 
 # Use clearance as user management
 gem 'clearance'
-
 # Use figaro to secure sensitive information
 gem 'figaro'
-
 # Use ominauth to support login with facebook
 gem 'omniauth-facebook'
-
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
@@ -31,6 +28,15 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
+
+# use carrierwave for file upload handling
+gem 'carrierwave', :github => "carrierwaveuploader/carrierwave"
+
+# use minimagick for image resizing & versioning
+gem "mini_magick"
+
+# use fog-aws to support remote file storage @ Amazon S3
+gem "fog-aws"
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

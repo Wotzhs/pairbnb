@@ -1,7 +1,9 @@
 <h1>All listings</h1>
+<%= link_to "Back to Home", root_path, method: :get %>
 <% Listing.all.each do |listing| %>
 	<p><%= "#{listing.user.first_name} #{listing.user.last_name}" %></p>
-	<p><%= "#{listing.title}" %></p>
+	<p><%= link_to listing.title, listing_path(listing.id), method: :get %></p>
+	<img src="<%= listing.cover.thumb.url %>">
 	<p><%= "#{listing.city.description}, #{listing.state.description}" %></p>
-	<p><%= "#{listing.price}" %></p>
+	<p><%= listing.price %></p>
 <% end %>

@@ -1,0 +1,11 @@
+<h1><%= @listing.title %></h1>
+<p><%= link_to "Edit listing", edit_listing_path(@listing.id), method: :get if @listing.user.id == current_user.id %></p>
+<p><%= link_to "Back to main listing", listings_path, method: :get %></p>
+<%= image_tag @listing.cover.url %>
+
+
+<h2>Room photos</h2>
+<% @listing.images.each do |image| %>
+<%= image_tag image.url %>
+<% end %>
+	

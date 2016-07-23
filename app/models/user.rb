@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   include Clearance::User
 
+  mount_uploader :avatar, ImageUploader
+
   validates :email, uniqueness: true
 
   has_many :authentications, :dependent => :destroy

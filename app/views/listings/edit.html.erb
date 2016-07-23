@@ -1,4 +1,4 @@
-<h1>Add new listing</h1>
+<h1>Edit listing</h1>
 
 <%= form_for @listing do |f| %>
 
@@ -44,5 +44,7 @@
 		<%= f.file_field :images, multiple: true %>
 		<br><br>
 
-		<%= submit_tag("List") %>
+		<%= submit_tag("Save") %>
 <% end %>
+
+<%= link_to "Discard", listing_path(@listing.id), method: :get %>

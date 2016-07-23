@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160722033510) do
+ActiveRecord::Schema.define(version: 20160723152621) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,23 +47,17 @@ ActiveRecord::Schema.define(version: 20160722033510) do
   end
 
   create_table "listings", force: :cascade do |t|
-    t.integer  "user_id",                             null: false
-    t.string   "title",                               null: false
-    t.text     "description",                         null: false
-    t.decimal  "price",       precision: 7, scale: 2, null: false
-    t.integer  "country_id",                          null: false
-    t.integer  "state_id",                            null: false
-    t.integer  "city_id",                             null: false
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-  end
-
-  create_table "photos", force: :cascade do |t|
-    t.integer  "listing_id",                  null: false
-    t.string   "path",                        null: false
-    t.string   "role",       default: "list", null: false
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.integer  "user_id",                                          null: false
+    t.string   "title",                                            null: false
+    t.text     "description",                                      null: false
+    t.decimal  "price",       precision: 7, scale: 2,              null: false
+    t.integer  "country_id",                                       null: false
+    t.integer  "state_id",                                         null: false
+    t.integer  "city_id",                                          null: false
+    t.datetime "created_at",                                       null: false
+    t.datetime "updated_at",                                       null: false
+    t.string   "cover"
+    t.string   "images",                              default: [],              array: true
   end
 
   create_table "states", force: :cascade do |t|
@@ -90,6 +84,7 @@ ActiveRecord::Schema.define(version: 20160722033510) do
     t.string   "remember_token",     limit: 128,                 null: false
     t.datetime "created_at",                                     null: false
     t.datetime "updated_at",                                     null: false
+    t.string   "avatar"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", using: :btree

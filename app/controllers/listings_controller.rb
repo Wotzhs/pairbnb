@@ -14,23 +14,32 @@ class ListingsController < ApplicationController
 	end
 
 	def edit
+		@listing = Listing.find(params[:id])
 	end
 
 	def update
+		@listing = Listing.find(params[:id])
+		if @listing.update(listing_params)
+			redirect_to @listing
+		else
+			render :edit
+		end
 	end
 
 	def show
+		@listing = Listing.find(params[:id])
 	end
 
 	def destroy
 	end
 
 	def index
+		@listing = Listing.all
 	end
 
 	private 
 	def listing_params
-		params.require(:listing).permit(:title, :description, :price, :country_id, :state_id, :city_id)
+		params.require(:listing).permit(:title, :description, :price, :country_id, :state_id, :city_id, :cover, {images: []})
 	end 
 
 end

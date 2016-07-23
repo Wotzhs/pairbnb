@@ -1,0 +1,18 @@
+ <%= form_for @user, html: { multipart: true } do |form| %>
+
+    <%= form.label :first_name %>
+    <%= form.text_field :first_name, type: 'text', required: 'required' %>
+
+    <%= form.label :last_name %>
+    <%= form.text_field :last_name, type: 'text', required: 'required' %>
+
+    <%= form.label :date_of_birth %>
+    <%= form.text_field :date_of_birth, type: 'text' , placeholder: 'DD/MM/YYYY', required: 'required' %>
+
+    <%= form.label :avatar %>
+    <%= form.file_field :avatar %>
+    <%= form.hidden_field :avatar_cache %>
+
+    <%= form.submit %>
+
+<% end %>
