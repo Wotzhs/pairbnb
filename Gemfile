@@ -32,6 +32,12 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # use carrierwave for file upload handling
 gem 'carrierwave', :github => "carrierwaveuploader/carrierwave"
 
+# use bootstrap for styling
+gem 'bootstrap3-rails'
+
+# use datepicker for reservation
+gem 'bootstrap-datepicker-rails',:require => 'bootstrap-datepicker-rails', :git => 'git://github.com/Nerian/bootstrap-datepicker-rails.git'
+
 # use minimagick for image resizing & versioning
 gem "mini_magick"
 

@@ -8,4 +8,13 @@
 <% @listing.images.each do |image| %>
 <%= image_tag image.url %>
 <% end %>
-	
+
+<h2>Make a reservation</h2>
+<input type="text" id='startdate' >
+<script type='text/javascript'>
+	$(document).ready(function(){
+		$('#startdate').datepicker({
+			autoclose: true
+		});
+	})
+</script>
