@@ -10,11 +10,40 @@
 <% end %>
 
 <h2>Make a reservation</h2>
-<input type="text" id='startdate' >
+
+<%= form_for @reservation do |f| %>
+
+	<%= f.hidden_field :listing_id, value: @listing.id %>
+
+	<%= f.label :From %>
+	<%= f.text_field :start_date %>
+
+	<%= f.label :To %>
+	<%= f.text_field :end_date %>
+
+	<%= submit_tag("Reserve") %>
+<% end %>
+
+<% if @listing.reservations.length > 0 %>
+	<% range = (@listing.reservations.first.start_date..@listing.reservations.first.end_date).to_a %>
+<% end %>
+
 <script type='text/javascript'>
 	$(document).ready(function(){
-		$('#startdate').datepicker({
-			autoclose: true
+
+
+<% if @listing.reservations.length > 0 %>
+		var reserved = <%= raw range.to_json %>;
+<% end %>
+
+		$('#reservation_start_date').datepicker({
+			autoclose: true,
+			todayHighlight: true,
+			format: "dd/mm/yyyy"
+		});
+		$('#reservation_end_date').datepicker({
+			autoclose: true,
+			format: "dd/mm/yyyy"
 		});
 	})
 </script>
