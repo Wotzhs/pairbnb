@@ -24,26 +24,31 @@
 	<%= submit_tag("Reserve") %>
 <% end %>
 
-<% if @listing.reservations.length > 0 %>
-	<% range = (@listing.reservations.first.start_date..@listing.reservations.first.end_date).to_a %>
-<% end %>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
 
 <script type='text/javascript'>
 	$(document).ready(function(){
 
 
-<% if @listing.reservations.length > 0 %>
-		var reserved = <%= raw range.to_json %>;
-<% end %>
+		var reserved = <%= raw find_all_reservations(@listing.id).to_json %>;
 
 		$('#reservation_start_date').datepicker({
 			autoclose: true,
 			todayHighlight: true,
-			format: "dd/mm/yyyy"
+			dateFormat: 'dd/mm/yy',
+			beforeShowDay: function(date){
+				var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
+				return [ reserved.indexOf(string) == -1 ];
+			}
 		});
+
 		$('#reservation_end_date').datepicker({
 			autoclose: true,
-			format: "dd/mm/yyyy"
+			dateFormat: 'dd/mm/yy',
+			beforeShowDay: function(date){
+				var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
+				return [ reserved.indexOf(string) == -1 ];
+			}
 		});
 	})
 </script>

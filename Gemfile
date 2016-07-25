@@ -22,6 +22,10 @@ gem 'figaro'
 gem 'omniauth-facebook'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+
+# use jquery-ui for datepicker customization
+gem 'jquery-ui-rails'
+
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
