@@ -1,4 +1,7 @@
 class Reservation < ActiveRecord::Base
+
+	scope :ordered, -> { order(start_date: :asc)}
+
 	belongs_to :listing
 	belongs_to :user
 

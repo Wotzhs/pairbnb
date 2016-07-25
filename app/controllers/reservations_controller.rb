@@ -4,7 +4,10 @@ class ReservationsController < ApplicationController
 
 	def create
 		@reservation = current_user.reservations.new(reservation_params)
+		@host = User.find(@reservation.listing.user_id)
 		if @reservation.save
+			ReservationMailer.notify_host(@host, @reservation.listing).deliver_later
+			ReservationJob.perform_later(current_user, @reservation.listing)
 			redirect_to root_path
 		else
 			redirect_to :back

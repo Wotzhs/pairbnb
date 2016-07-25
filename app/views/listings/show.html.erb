@@ -9,47 +9,56 @@
 <%= image_tag image.url %>
 <% end %>
 
-<h2>Make a reservation</h2>
 
-<%= form_for @reservation do |f| %>
+<% if @listing.user.id != current_user.id %>
+	<h2>Make a reservation</h2>
 
-	<%= f.hidden_field :listing_id, value: @listing.id %>
+	<%= form_for @reservation do |f| %>
 
-	<%= f.label :From %>
-	<%= f.text_field :start_date %>
+		<%= f.hidden_field :listing_id, value: @listing.id %>
 
-	<%= f.label :To %>
-	<%= f.text_field :end_date %>
+		<%= f.label :From %>
+		<%= f.text_field :start_date %>
 
-	<%= submit_tag("Reserve") %>
+		<%= f.label :To %>
+		<%= f.text_field :end_date %>
+
+		<%= submit_tag("Reserve") %>
+	<% end %>
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+
+	<script type='text/javascript'>
+		$(document).ready(function(){
+
+
+			var reserved = <%= raw find_all_reservations(@listing.id).to_json %>;
+
+			$('#reservation_start_date').datepicker({
+				autoclose: true,
+				todayHighlight: true,
+				dateFormat: 'dd/mm/yy',
+				beforeShowDay: function(date){
+					var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
+					return [ reserved.indexOf(string) == -1 ];
+				}
+			});
+			
+			$('#reservation_end_date').datepicker({
+				autoclose: true,
+				dateFormat: 'dd/mm/yy',
+				beforeShowDay: function(date){
+					var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
+					return [ reserved.indexOf(string) == -1 ];
+				}
+			});
+			
+		})
+	</script>
+<% else %>
+	<h2>All reservations</h2>
+	<% @listing.reservations.ordered.each_with_index do |list, index| %>
+		<p><%= "#{@listing.reservations.ordered[index].start_date} #{@listing.reservations.ordered[index].end_date} #{@listing.reservations.ordered[index].user.first_name} #{@listing.reservations.ordered[index].user.last_name} #{@listing.reservations.ordered[index].user.email}" %></p>
+	<% end %>
+
 <% end %>
-
-<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
-
-<script type='text/javascript'>
-	$(document).ready(function(){
-
-
-		var reserved = <%= raw find_all_reservations(@listing.id).to_json %>;
-
-		$('#reservation_start_date').datepicker({
-			autoclose: true,
-			todayHighlight: true,
-			dateFormat: 'dd/mm/yy',
-			beforeShowDay: function(date){
-				var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
-				return [ reserved.indexOf(string) == -1 ];
-			}
-		});
-		
-		$('#reservation_end_date').datepicker({
-			autoclose: true,
-			dateFormat: 'dd/mm/yy',
-			beforeShowDay: function(date){
-				var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
-				return [ reserved.indexOf(string) == -1 ];
-			}
-		});
-		
-	})
-</script>

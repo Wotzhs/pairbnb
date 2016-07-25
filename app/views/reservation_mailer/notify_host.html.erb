@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>You are a host!</h1>
+    <h1><%= @subject %>, <%= @host.first_name %></h1>
+    <p>
+      You have a new reservation for the following listing<br>
+      <%= link_to @listing.title, listing_path(@listing.id), method: :get %><br><br>
+    </p>
+    
+  </body>
+</html>
