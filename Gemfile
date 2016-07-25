@@ -48,6 +48,9 @@ gem "mini_magick"
 # use fog-aws to support remote file storage @ Amazon S3
 gem "fog-aws"
 
+# use sidekiq for asynchronous mailing
+gem 'sidekiq'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
