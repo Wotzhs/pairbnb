@@ -3,9 +3,10 @@ class UsersController < ApplicationController
   def create
   	@user = User.new(user_params)
   	if @user.save
-  		redirect_to controller: 'users'
+  		redirect_to sign_in_path
+      UserMailer.welcome_email(@user).deliver_later
   	else
-  		redirect_to 'new'
+  		render :new
   	end
   end
 
