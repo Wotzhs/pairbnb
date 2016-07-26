@@ -22,6 +22,8 @@ module Pairbnb
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    # mailer setup
     config.action_mailer.default_url_options = { host: 'localhost:3000'}
     config.action_mailer.delivery_method = :smtp
     config.action_mailer.smtp_settings = {
@@ -33,7 +35,16 @@ module Pairbnb
         authentication: 'plain',
         enable_starttls_auto: true 
     }
+
+    # sidekiq setup
     config.active_job.queue_adapter = :sidekiq
+
+    # Braintree setup for payment gateway
+    Braintree::Configuration.environment = :sandbox
+    Braintree::Configuration.merchant_id = ENV['braintree_merchant_id']
+    Braintree::Configuration.public_key  = ENV['braintree_public_key']
+    Braintree::Configuration.private_key = ENV['braintree_private_key']
+
   end
 end
 

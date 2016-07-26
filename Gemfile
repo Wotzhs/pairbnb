@@ -54,6 +54,9 @@ gem 'sidekiq'
 # use braintee for payment gateway simulation
 gem "braintree", "~> 2.64.0"
 
+# use gon to allow variable interaction between javascript & rails
+gem 'gon', '~> 5.1.2'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

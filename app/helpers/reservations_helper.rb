@@ -7,4 +7,21 @@ module ReservationsHelper
 		end
 		@dates.flatten
 	end
+
+	def get_list_price(listing_id)
+		@listing = Listing.find(listing_id)
+		@price = @listing.price.to_f
+		@price
+	end
+
+	def overlap?(start_date, end_date, listing_id)
+		dates = (start_date..end_date).to_a
+		reserved = find_all_reservations(listing_id)
+		(dates-reserved).length != dates.length
+	end
+
+	def no_of_nights(end_date, start_date)
+		(end_date - start_date).to_i
+	end
+
 end

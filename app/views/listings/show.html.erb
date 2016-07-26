@@ -13,7 +13,7 @@
 <% if @listing.user.id != current_user.id %>
 	<h2>Make a reservation</h2>
 
-	<%= form_for @reservation do |f| %>
+	<%= form_for @reservation, url: new_reservation_path ,method: :get do |f| %>
 
 		<%= f.hidden_field :listing_id, value: @listing.id %>
 
@@ -23,7 +23,7 @@
 		<%= f.label :To %>
 		<%= f.text_field :end_date %>
 
-		<%= submit_tag("Reserve") %>
+		<%= button_tag 'reserve', class: "btn btn-primary" %>
 	<% end %>
 
 	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>

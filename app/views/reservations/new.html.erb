@@ -1,0 +1,39 @@
+<% @price = get_list_price(@reservation.listing_id) %>
+<% @nights = no_of_nights(@reservation.end_date,@reservation.start_date) %>
+
+<% if overlap?(@reservation.start_date, @reservation.end_date, @reservation.listing_id) %>
+	<h1>Uh oh those dates are not available for your reservation</h1>
+	<p>Please ensure that your reservation dates do not include the reserved dates</p>
+	<p><%= link_to "Choose again", _back_url, method: :get %></p>
+<% else %>
+	
+	<%= form_for @reservation do |f| %>
+
+		<h1>Confirm reservation</h1>
+		<h3>Please check all the particulars before proceed with payment</h3>
+
+		<%= f.hidden_field :listing_id, value: @listing.id %>
+
+		<%= content_tag(:p, "Check in date  : #{@reservation.start_date}") %>
+		<%= f.hidden_field :start_date, value: @reservation.start_date %>
+
+		<%= content_tag(:p, "Check out date : #{@reservation.end_date}") %>
+		<%= f.hidden_field :end_date, value: @reservation.end_date %>
+
+		<%= content_tag(:p, "Amount payable: #{@price * @nights}") %>
+		<%= content_tag(:p, "Details:-") %>
+		<%= content_tag(:p, "No. of nights: #{@nights}") %>
+		<%= content_tag(:p, "Price: #{@price}") %>
+
+		<%= f.label :Please_enter_your_payment_details %>
+		<%= content_tag(:div, "" , id: "dropin-container") %>
+		<%= submit_tag("Pay") %>
+	<% end %>
+
+	<script src="https://js.braintreegateway.com/js/braintree-2.27.0.min.js"></script>
+	<script>
+		braintree.setup(gon.client_token, 'dropin', {
+		  container: 'dropin-container'
+		});
+	</script>
+<% end %>
