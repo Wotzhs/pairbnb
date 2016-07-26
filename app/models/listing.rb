@@ -18,5 +18,11 @@ class Listing < ActiveRecord::Base
 	validates :country_id, presence: true
 	validates :state_id, presence: true
 	validates :city_id, presence: true
+	validate :check_inputs
+
+
+	private
+	def check_inputs
+	end
 
 end

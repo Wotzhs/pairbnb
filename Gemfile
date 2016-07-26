@@ -51,6 +51,9 @@ gem "fog-aws"
 # use sidekiq for asynchronous mailing
 gem 'sidekiq'
 
+# use braintee for payment gateway simulation
+gem "braintree", "~> 2.64.0"
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

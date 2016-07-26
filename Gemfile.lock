@@ -58,6 +58,8 @@ GEM
       debug_inspector (>= 0.0.1)
     bootstrap3-rails (3.2.0)
       rails (>= 4.0.0)
+    braintree (2.64.0)
+      builder (>= 2.0.0)
     builder (3.2.2)
     byebug (9.0.5)
     clearance (1.14.1)
@@ -229,6 +231,7 @@ PLATFORMS
 DEPENDENCIES
   bootstrap-datepicker-rails!
   bootstrap3-rails
+  braintree (~> 2.64.0)
   byebug
   carrierwave!
   clearance
