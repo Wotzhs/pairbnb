@@ -35,7 +35,13 @@ class ListingsController < ApplicationController
 	end
 
 	def index
-		@listing = Country.search_by_desc(params[:search][:destination]).first.listings
+		if params == nil
+			@result = PgSearch.multisearch(params[:search][:destination]).first.content
+			@listing = Country.find_by(description: @result).listings
+		else
+			@listing = Listing.all
+		end
+
 	end
 
 	private 

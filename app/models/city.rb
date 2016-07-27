@@ -1,8 +1,7 @@
 class City < ActiveRecord::Base
 
 	include PgSearch
-	multisearchable :against => :description
-
+	multisearchable :against => [:description]
 
 	validates :description, uniqueness: true
 

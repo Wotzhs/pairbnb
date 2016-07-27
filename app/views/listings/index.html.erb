@@ -1,6 +1,6 @@
 <h1>All listings</h1>
 <%= link_to "Back to Home", root_path, method: :get %>
 <% @listing.each do |index| %>
-<%= content_tag(:h2, index.title) %>
+<%= link_to content_tag(:h2, index.title), listing_path(index.id), method: :get %>
 <%= image_tag(index.cover.thumb.url) %>
 <% end %>
