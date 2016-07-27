@@ -9,8 +9,9 @@
 </head>
 <body>
 
-<% form_tag, method: :get, action: listings_path %>
-	<% input_tag %>
+<%= form_tag(listings_url, method: :get) do %>
+	<%= text_field_tag 'search[destination]', nil, placeholder: "Search for accomodation at your destination" %>
+<% end %>
 
 <%= yield %>
 

@@ -3,7 +3,7 @@ class ListingsController < ApplicationController
 	def create
 		@listing = current_user.listings.new(listing_params)
 		if @listing.save
-			redirect_to listings_path
+			redirect_to @listing
 		else
 			render :new
 		end
@@ -35,7 +35,7 @@ class ListingsController < ApplicationController
 	end
 
 	def index
-		@listing = Listing.all
+		@listing = Country.search_by_desc(params[:search][:destination]).first.listings
 	end
 
 	private 

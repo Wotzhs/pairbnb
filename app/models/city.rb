@@ -1,10 +1,12 @@
 class City < ActiveRecord::Base
 
 	include PgSearch
+	multisearchable :against => :description
+
 
 	validates :description, uniqueness: true
 
-	has_and_belongs_to_many :listings
+	has_many :listings
 	belongs_to :state
 	belongs_to :country
 end
