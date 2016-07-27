@@ -57,6 +57,9 @@ gem "braintree", "~> 2.64.0"
 # use gon to allow variable interaction between javascript & rails
 gem 'gon', '~> 5.1.2'
 
+# use pg search for user database query
+gem 'pg_search'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
