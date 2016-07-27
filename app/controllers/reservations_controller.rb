@@ -5,9 +5,10 @@ class ReservationsController < ApplicationController
 	def new
 		@reservation = Reservation.new(reservation_params)
 		if !@reservation.valid?
-			redirect_to :back
+			redirect_to :back			
+		else
+			gon.client_token = generate_client_token
 		end
-		gon.client_token = generate_client_token
 	end
 
 	def create

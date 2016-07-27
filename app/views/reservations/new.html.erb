@@ -27,7 +27,7 @@
 
 		<%= f.label :Please_enter_your_payment_details %>
 		<%= content_tag(:div, "" , id: "dropin-container") %>
-		<%= submit_tag("Pay") %>
+		<%= submit_tag("Pay") %> <%= link_to "Cancel", _back_url, class: "btn btn-danger", method: :get %>
 	<% end %>
 
 	<script src="https://js.braintreegateway.com/js/braintree-2.27.0.min.js"></script>
