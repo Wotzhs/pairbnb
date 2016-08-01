@@ -9,6 +9,7 @@ class Listing < ActiveRecord::Base
 	belongs_to :city
 	has_many :reservations
 	has_many :tags, through: :listing_tags
+	has_many :payments
 
 	validates :user_id, presence: true
 	validates :title, presence: true

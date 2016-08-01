@@ -4,6 +4,7 @@ class Reservation < ActiveRecord::Base
 
 	belongs_to :listing
 	belongs_to :user
+	has_one :payment
 
 	validates :start_date, presence: { strict: true }
 	validates :end_date, presence: { strict: true }

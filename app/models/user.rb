@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   has_many :authentications, :dependent => :destroy
   has_many :listings
   has_many :reservations
+  has_many :payments
 
   def self.create_with_auth_hash(auth_hash)
   	@user = User.new

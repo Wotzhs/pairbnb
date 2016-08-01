@@ -3,7 +3,7 @@ class ReservationsController < ApplicationController
 	include ReservationsHelper
 
 	def new
-		@reservation = Reservation.new(reservation_params)
+		@reservation = current_user.reservations.new(reservation_params)
 		if !@reservation.valid?
 			redirect_to :back			
 		else
@@ -18,14 +18,12 @@ class ReservationsController < ApplicationController
 				amount: no_of_nights(@reservation.end_date,@reservation.start_date) * get_list_price(@reservation.listing_id),
 				payment_method_nonce: params[:payment_method_nonce])
 		if @result.success?
-			if @reservation.save
-				ReservationMailer.notify_host(@host, @reservation.listing).deliver_later
-				ReservationJob.perform_later(current_user, @reservation.listing)
-				redirect_to root_path
-			else
-				redirect_to :back
-			end
+			@reservation.save
+			@payment = current_user.payments.create!(transaction_id: @result.transaction.id, listing_id: @reservation.listing_id, reservation_id: @reservation.id, transaction_amount: @result.transaction.amount)
+			ReservationMailer.notify_host(@host, @reservation.listing).deliver_later
+			ReservationJob.perform_later(current_user, @reservation.listing)
 		end
+		redirect_to root_path
 	end
 
 	def edit
