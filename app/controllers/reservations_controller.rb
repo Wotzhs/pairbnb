@@ -1,6 +1,7 @@
 class ReservationsController < ApplicationController
 
 	include ReservationsHelper
+	before_action :require_login
 
 	def new
 		@reservation = current_user.reservations.new(reservation_params)
@@ -48,5 +49,10 @@ class ReservationsController < ApplicationController
 
 	def generate_client_token
 		Braintree::ClientToken.generate
+	end
+
+	def require_login
+		session[:prev] = request.referer
+		super
 	end
 end

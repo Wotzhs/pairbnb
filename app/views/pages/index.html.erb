@@ -1,6 +1,22 @@
+<div id="main">
 
-<h1>Welcome, <%= current_user.first_name %></h1>
-<%= link_to "Edit profile", edit_user_path(current_user.id), method: :get %>
 <%= link_to "Add listing", new_listing_path, method: :get %>
 <%= link_to "See all listings", listings_path, method: :get %>
 <%= link_to "Sign Out", sign_out_path, method: :delete %>
+
+	<div class="row">
+		<div class="col-sm-2 col-md-2 col-lg-2"></div>
+		<div class="col-sm-8 col-md-8 col-lg-8">
+			<%= form_tag(listings_url, method: :get) do %>
+				<div class="input-group">
+					<%= text_field_tag 'search[destination]', nil, placeholder: "Search for accomodation at your destination", class: "form-control" %>
+					<span class="input-group-btn"><button class="btn btn-primary">Search</button></span>
+				</div>
+			<% end %>
+		</div>
+	</div>
+
+
+
+</div>
+

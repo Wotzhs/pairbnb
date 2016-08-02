@@ -1,5 +1,5 @@
 <h1><%= @listing.title %></h1>
-<p><%= link_to "Edit listing", edit_listing_path(@listing.id), method: :get if @listing.user.id == current_user.id %></p>
+<p><%= link_to "Edit listing", edit_listing_path(@listing.id), method: :get if !current_user.nil? && @listing.user.id == current_user.id %></p>
 <p><%= link_to "Back to main listing", listings_path, method: :get %></p>
 <%= image_tag @listing.cover.url %>
 
@@ -10,7 +10,7 @@
 <% end %>
 
 
-<% if @listing.user.id != current_user.id %>
+<% if current_user.nil? || @listing.user.id != current_user.id %>
 	<h2>Make a reservation</h2>
 
 	<%= form_for @reservation, url: new_reservation_path ,method: :get do |f| %>
